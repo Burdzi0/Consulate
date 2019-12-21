@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Dodanie wniosku</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../css/default.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</head>
+
+<body>
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <h1>Dodaj nowy wniosek</h1>
+            <p>W celu założenia sprawy należy najpierw wypełnić i wysłać wniosek.</p>
+        </div>
+        <div class="col-2"></div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <form th:action="@{/application/save}" th:object="${applicationDto}" method="post">
+                <div class="form-group">
+                    <label for="title">Tytuł</label>
+                    <input type="text" class="form-control" id="title" placeholder="Tytuł wniosku" th:field="*{title}" required>
+                </div>
+                <div class="form-group">
+                    <label for="cont">Treść</label>
+                    <textarea class="form-control" id="cont" placeholder="Treść wniosku" rows="5" th:field="*{content}"
+                              required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="name">Imię</label>
+                    <input type="text" class="form-control" id="name" placeholder="Imię" th:field="*{firstName}" required>
+                </div>
+                <div class="form-group">
+                    <label for="surname">Nazwisko</label>
+                    <input type="text" class="form-control" id="surname" placeholder="Nazwisko" th:field="*{lastName}" required>
+                </div>
+                <div class="form-group">
+                    <label for="orgsurname">Nazwisko rodowe</label>
+                    <input type="text" class="form-control" id="orgsurname" placeholder="Nazwisko rodowe" th:field="*{maidenName}" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Adres email</label>
+                    <input type="email" class="form-control" th:field="*{email}" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="plec">Płeć</label>
+                    <select id="plec" th:field="*{sex}">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <option th:value="M">M</option>
+                            <option th:value="K">K</option>
+                            <div class="dropdown-divider"></div>
+                            <option th:value="O">Inna</option>
+                        </div>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="stanc">Stan cywilny</label>
+                    <select id="stanc" th:field="*{martialState}">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <option th:value="wolny">wolny/a</option>
+                            <option th:value="zonaty">żonaty/zamężna</option>
+                            <option th:value="wdowiec">wdowiec/wdowa</option>
+                            <option th:value="rozwiedziony">rozwiedziony/a</option>
+                        </div>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="bday">Data urodzenia</label>
+                    <input type="date" class="form-control" id="bday" th:field="*{birthday}">
+                </div>
+                <div class="form-group">
+                    <label for="sday">Data wydania paszportu</label>
+                    <input type="date" class="form-control" id="sday" th:field="*{passportCreationTime}">
+                </div>
+                <div class="form-group">
+                    <label for="eday">Data wygaśnięcia paszportu</label>
+                    <form:input type="date" class="form-control" id="eday" th:field="*{passportExpirationTime}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="docnum">Numer identyfikacyjny (np. PESEL)</label>
+                    <input type="text" class="form-control" id="docnum" th:field="*{pesel}">
+                </div>
+
+                <div class="form-group">
+                    <label for="organ">Organ wydający paszport</label>
+                    <input type="text" class="form-control" id="organ" th:field="*{pasportGenerator}">
+                </div>
+
+                <div class="form-group">
+                    <label for="Cel">Cel wizyty</label>
+                    <select id="Cel" th:field="*{purpose}">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <option th:value="tourist">turystyczny</option>
+                            <option th:value="fvisit">odwiedziny rodziny/znajomych</option>
+                            <option th:value="sport">udział w wydarzeniu sportowym</option>
+                            <option th:value="work">podjęcie pracy</option>
+                            <option th:value="job">zadania służbowe</option>
+                            <option th:value="uni">studia</option>
+                            <option th:value="research">badania naukowe</option>
+                            <option th:value="hospital">leczenie</option>
+                        </div>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="dday">Planowana data przyjazdu</label>
+                    <input type="date" class="form-control" id="dday" th:field="*{arriveTime}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="days">Planowany czas pobytu</label>
+                    <input type="number" class="form-control" id="days" th:field="*{visitationLenght}" required>
+                </div>
+                <button type="submit" class="btn btn-block btn-success">Wyślij</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-3"></div>
+    <div class="row mt-5">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <p>Created by <u>Anna Bodek i Łukasz Burdyna</u>
+        </div>
+        <div class="col-6"></div>
+    </div>
+</div>
+
+</body>
+
+</html>

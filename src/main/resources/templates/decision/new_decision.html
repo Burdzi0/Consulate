@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>decisions</title>
+    <link rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css}">
+    <script th:src="@{/assets/js/slim.min.js}"></script>
+    <script th:src="@{/assets/js/popper.min.js}"></script>
+    <script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/assets/fonts/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/fonts/material-icons.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/Contact-Form-Clean.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/Contact-Form-Clean.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}"/>
+</head>
+
+<body style="background-color: #d7efef;">
+<div class="container">
+    <main class="mt-5" style="background-color: #ffffff;">
+        <div class="row">
+            <div class="col-xl-3"></div>
+            <div class="col-xl-6">
+                <h1 style="padding: 10px;">Dodawanie decyzji</h1>
+                <div class="alert alert-success alert-dismissable" role="alert" id="alert"><span><strong>Dodano decyzję o numerze 5</strong></span>
+                </div>
+                <form th:action="@{/decision/save}" action="#" method="post" th:object="${decisionDto}">
+                    <div class="form-group"><label>Sprawa</label>
+                        <select class="form-control" th:field="*{matter}">
+                            <option value="12" selected="" th:value="1">Sprawa 1</option>
+                            <option value="13" th:value="2">Sprawa 2</option>
+                            <option value="14" th:value="3">Sprawa 3</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Rodzaj decyzji</label>
+                        <select class="form-control" th:field="*{decisionType}" required="">
+                            <option value="12" selected="" th:value="POSITIVE">Pozytywna</option>
+                            <option value="13" th:value="NEGATIVE">Negatywna</option>
+                            <option value="14" th:value="TO_BE_SUPPLEMENTED">Do uzupełnienia</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Uzasadnienie</label>
+                        <div class="alert alert-danger" role="alert" id="error">
+                            <span>Uzasadnienie decyzji jest obowiązkowe! Proszę uzupełnić pole.</span>
+                        </div>
+                        <textarea class="form-control form-control-lg" id="contenttext" required=""
+                                  title="Wymagane pole!" th:field="*{reason}"></textarea></div>
+                    <div class="form-group text-success">
+                        <button class="btn btn-success btn-block" id="button" th:type="submit">Dodaj decyzję
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xl-3"></div>
+        </div>
+    </main>
+</div>
+<script th:src="@{/assets/js/jquery.min.js}"></script>
+<script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/bs-init.js}"></script>
+<script th:src="@{/assets/js/expand.js}"></script>
+</body>
+
+</html>
