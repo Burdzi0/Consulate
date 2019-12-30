@@ -1,6 +1,7 @@
 package software.design.consulate.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -17,6 +18,7 @@ public class Decision {
     private DecisionType decisionType;
 
     @Lob
+    @Size(min = 15, message = "Decision has to be at least 15 letters long")
     private String reason;
 
     private Date added;

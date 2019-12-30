@@ -12,7 +12,8 @@
     <link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
     <link rel="stylesheet" th:href="@{/assets/css/Navigation-with-Search.css}">
     <link rel="stylesheet" th:href="@{/assets/css/styles.css}">
-    <link rel="stylesheet" th:href="@{@{https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css}}">
+    <link rel="stylesheet"
+          th:href="@{@{https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css}}">
 
 </head>
 
@@ -52,17 +53,23 @@
                             <td><span th:text="${decision.decisionType}"></span></td>
                             <td><span th:text="${decision.added}"></span></td>
                             <td>
-                                <div><a class="btn" data-toggle="collapse" aria-expanded="false"
-                                        aria-controls="collapse-1" href="#collapse-1" role="button"
-                                        style="min-width: 200px;padding-right: 0;padding-top: 0;padding-bottom: 0;padding-left: 0;border: none;"><span th:text="${decision.reason}"></span></a>
+                                <div>
+                                    <a class="btn" data-toggle="collapse" aria-expanded="false"
+                                       aria-controls="collapse-1" href="#collapse-1" role="button"
+                                       style="min-width: 200px;padding: 0;border: none;text-align: left">
+                                        <span th:text="${#strings.substring(decision.reason,0,10).concat('...')}">...</span>
+                                    </a>
                                     <div
                                             class="collapse" id="collapse-1">
-                                        <p>Tekst uzasadnienia</p>
+                                        <p th:text="${decision.reason}"></p>
                                     </div>
                                 </div>
                             </td>
-                            <td><i class="material-icons"
-                                   style="font-size: 30px;color: rgb(162,23,23);">delete_forever</i></td>
+                            <td>
+                                <a th:href="@{'/decision/' + ${decision.id}}">
+                                    <i class="material-icons" style="font-size: 30px;color: rgb(162,23,23);">delete_forever</i>
+                                </a>
+                            </td>
                         </tr>
                         </tbody>
                     </table>

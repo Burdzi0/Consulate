@@ -11,11 +11,10 @@ $(".collapse").click(function() {
 
 $(document).ready(function(){
     $('button').click(function(){
-        if ($.trim($("#contenttext").val())) {
-            $('#alert').show()
-            $('#error').hide()
-        } else {
+        if (!$.trim($("#contenttext").val())) {
             $('#error').show()
+        } else {
+            $('#error').hide()
         }
     }) 
 });
