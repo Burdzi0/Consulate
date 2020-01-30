@@ -4,17 +4,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-import software.design.consulate.model.dto.CreateDecisionDto;
+import software.design.consulate.model.dto.decision.CreateDecisionDto;
 import software.design.consulate.service.DecisionService;
+import software.design.consulate.service.OfficialMatterService;
 
 @Controller
 @RequestMapping("/decision")
 public class DecisionController {
 
     private DecisionService decisionService;
+    private OfficialMatterService officialMatterService;
 
-    public DecisionController(DecisionService decisionService) {
+    public DecisionController(DecisionService decisionService, OfficialMatterService officialMatterService) {
         this.decisionService = decisionService;
+        this.officialMatterService = officialMatterService;
     }
 
     @GetMapping(value = {"", "/", "/index", "/index.html"})
@@ -28,6 +31,7 @@ public class DecisionController {
     public ModelAndView newDecision() {
         final ModelAndView mav = new ModelAndView("decision/new_decision");
         mav.addObject("decisionDto", new CreateDecisionDto());
+        mav.addObject("matters", officialMatterService.findAllWithoutTerminalDecision());
         return mav;
     }
 
@@ -38,7 +42,7 @@ public class DecisionController {
     }
 
     @GetMapping(value = "/{id}")
-    public RedirectView save(@PathVariable Long id) {
+    public RedirectView delete(@PathVariable Long id) {
         decisionService.delete(id);
         return new RedirectView("");
     }

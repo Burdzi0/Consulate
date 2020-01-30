@@ -11,7 +11,8 @@ public class Decision {
     @GeneratedValue
     private Long id;
 
-    // TODO sprawa
+    private String centralId;
+
     private String matter;
 
     @Enumerated(value = EnumType.STRING)
@@ -26,11 +27,21 @@ public class Decision {
     public Decision() {
     }
 
-    public Decision(String matter, String decisionType, String reason) {
+    public Decision(String centralId, String matter, String decisionType, String reason) {
+        this.centralId = centralId;
         this.matter = matter;
         this.decisionType = DecisionType.valueOf(decisionType);
         this.reason = reason;
         this.added = new Date();
+    }
+
+    public boolean isTerminal() {
+        return this.decisionType.equals(DecisionType.NEGATIVE) ||
+                this.decisionType.equals(DecisionType.POSITIVE);
+    }
+
+    public boolean isNotTerminal() {
+        return !isTerminal();
     }
 
     public Long getId() {
@@ -39,6 +50,14 @@ public class Decision {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCentralId() {
+        return centralId;
+    }
+
+    public void setCentralId(String centralId) {
+        this.centralId = centralId;
     }
 
     public String getMatter() {

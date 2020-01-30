@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Lista wniosków</title>
+    <title>Lista spraw</title>
     <meta charset="utf-8">
     <link rel="stylesheet" th:href="@{/assets/css/styles.css}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -24,59 +24,58 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col">
-            <h1>Lista wniosków</h1>
+            <h1>Lista spraw</h1>
+            Lista wszystkich założonych spraw
         </div>
     </div>
-    <div class="row">
-        <div class="col">
-            <a href="/application/new">
-                <button type="button" class="btn btn-secondary" style="margin: 1em 0em 0.5em 0em;">Złóż wniosek</button>
-            </a>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Wprowadź centralny identyfikator sprawy"
+               aria-label="Identyfikator sprawy" aria-describedby="button-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Szukaj</button>
         </div>
     </div>
-
     <div class="row mt-3">
         <div class="col">
             <table class="table table-striped">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">ID Centralne</th>
+                    <th scope="col">ID Lokalne</th>
+                    <th scope="col">Treść</th>
+                    <th scope="col">Data założenia</th>
                     <th scope="col">Imię wnioskodawcy</th>
                     <th scope="col">Nazwisko wnioskodawcy</th>
-                    <th scope="col">Tytuł</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">ID Centralne sprawy</th>
+                    <th scope="col">Obywatelstwo wnioskodawcy</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="app : ${applications}">
-                    <td><span th:text="${app.localId}"></span></td>
-                    <td><span th:text="${app.firstName}"></span></td>
-                    <td><span th:text="${app.lastName}"></span></td>
-                    <td><span th:text="${app.title}"></span></td>
-                    <td><span th:text="${app.pesel}"> Title </span></td>
-                    <td><span th:text="${app.centralId}"></span></td>
+                <tr th:each="matter: ${matters}">
+                    <td><span th:text="${matter.centralId}"></span></td>
+                    <td><span th:text="${matter.localId}"></span></td>
+                    <td><span th:text="${matter.note}"></span></td>
+                    <td><span th:text="${matter.creationDate.toString().substring(0, matter.creationDate.toString().length() - 12)}"></span></td>
+                    <td><span th:text="${matter.application.firstName}"></span></td>
+                    <td><span th:text="${matter.application.lastName}"></span></td>
+                    <td><span th:text="${matter.application.nationalities}"></span></td>
                     <td>
-                        <a th:href="@{'/application/info/' + ${app.localId}}">
+                        <a th:href="@{'/matter/info/' + ${matter.localId}}">
                             <i class="material-icons">info</i>
                         </a>
                     </td>
                     <td>
-                        <a th:href="@{'/application/edit/' + ${app.localId}}">
+                        <a th:href="@{'/matter/edit/' + ${matter.localId}}">
                             <i class="material-icons">edit</i>
                         </a>
                     </td>
                     <td>
-                        <a th:href="@{'/application/delete/' + ${app.localId}}">
+                        <a th:href="@{'/matter/delete/' + ${matter.localId}}" onclick="alert('Usunięto sprawę')" >
                             <i class="material-icons"
                                style="color: rgb(162,23,23);">cancel</i>
                         </a>
-                        <script>
-
-                        </script>
                     </td>
                 </tr>
                 </tbody>

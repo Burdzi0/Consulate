@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Edycja sprawy</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Muli|Open+Sans&display=swap">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</head>
+
+<body>
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-8">
+            <h1>Edytuj sprawę</h1>
+        </div>
+        <div class="col-2"></div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>ID Centralne</b>
+                </div>
+                <div class="col">
+                    <span th:text="${officialMatter.centralId != null} ? ${officialMatter.centralId} : 'Brak'">-</span>
+
+                </div>
+            </div>
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>ID Lokalne</b>
+                </div>
+                <div class="col">
+                    <span th:text="${officialMatter.localId}">-</span>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>ID Wniosku</b>
+                </div>
+                <div class="col">
+                    <span th:text="${officialMatter.application.localId}">-</span>
+                </div>
+            </div>
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>Data założenia</b>
+                </div>
+                <div class="col">
+                    <span th:text="${officialMatter.creationDate.toString().substring(0, officialMatter.creationDate.toString().length() - 12)}">-</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="mt-5 mb-3">
+    <div class="row row-bottom-margin">
+        <div class="col">
+            <h3>Wprowadź zmiany</h3>
+        </div>
+    </div>
+    <form th:action="@{'/matter/edit/' + ${officialMatter.localId}}" action="#" method="post"
+          th:object="${editOfficialMatterDto}">
+
+        <div class="row row-bottom-margin">
+            <div class="col">
+                <div class="form-group">
+                    <label for="cont"><b>Komentarz</b></label>
+                    <textarea class="form-control" th:field="*{note}" id="cont" rows="5"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h3>Opłata</h3>
+                <div class="form-group">
+                    <label for="amount">Kwota</label>
+                    <input type="text" class="form-control" id="amount" th:field="*{value}" placeholder="Kwota" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="Cel">Waluta</label>
+                    <select th:field="*{currency}" id="Cel">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <option th:value="PLN" >PLN</option>
+                            <option th:value="GBP">GBP</option>
+                        </div>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-block btn-success float-right" onclick="alert('Pomyślnie zapisano zmiany')" style="width: 25%;">Zapisz zmiany
+                </button>
+            </div>
+        </div>
+    </form>
+    <div class="col-3"></div>
+    <div class="row mt-5">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <p>Created by <u>Anna Bodek i Łukasz Burdyna</u>
+        </div>
+        <div class="col-6"></div>
+    </div>
+</div>
+
+</body>
+
+</html>

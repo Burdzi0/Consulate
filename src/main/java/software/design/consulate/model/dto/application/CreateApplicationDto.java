@@ -1,6 +1,4 @@
-package software.design.consulate.model.dto;
-
-import java.util.Date;
+package software.design.consulate.model.dto.application;
 
 public class CreateApplicationDto {
 
@@ -12,19 +10,21 @@ public class CreateApplicationDto {
     protected String email;
     protected char sex;
     protected String martialState;
-    protected Date birthday;
-    protected Date passportCreationTime;
-    protected Date passportExpirationTime;
+    protected String birthday;
+    protected String passportCreationTime;
+    protected String passportExpirationTime;
     protected String pesel;
-    protected String pasportGenerator;
+    protected String passportGenerator;
     protected String purpose;
-    protected Date arriveTime;
-    protected int visitationLenght;
+    protected String arriveTime;
+    protected int visitationLength;
+    protected String nationalities;
+    protected String passportNumber;
 
     public CreateApplicationDto() {
     }
 
-    public CreateApplicationDto(String title, String content, String firstName, String lastName, String maidenName, String email, char sex, String martialState, Date birthday, Date passportCreationTime, Date passportExpirationTime, String pesel, String pasportGenerator, String purpose, Date arriveTime, int visitationLenght) {
+    public CreateApplicationDto(String title, String content, String firstName, String lastName, String maidenName, String email, char sex, String martialState, String birthday, String passportCreationTime, String passportExpirationTime, String pesel, String passportGenerator, String purpose, String arriveTime, int visitationLength, String nationalities, String passportNumber) {
         this.title = title;
         this.content = content;
         this.firstName = firstName;
@@ -37,10 +37,12 @@ public class CreateApplicationDto {
         this.passportCreationTime = passportCreationTime;
         this.passportExpirationTime = passportExpirationTime;
         this.pesel = pesel;
-        this.pasportGenerator = pasportGenerator;
+        this.passportGenerator = passportGenerator;
         this.purpose = purpose;
         this.arriveTime = arriveTime;
-        this.visitationLenght = visitationLenght;
+        this.visitationLength = visitationLength;
+        this.nationalities = nationalities;
+        this.passportNumber = passportNumber;
     }
 
     public String getTitle() {
@@ -107,27 +109,27 @@ public class CreateApplicationDto {
         this.martialState = martialState;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
-    public Date getPassportCreationTime() {
+    public String getPassportCreationTime() {
         return passportCreationTime;
     }
 
-    public void setPassportCreationTime(Date passportCreationTime) {
+    public void setPassportCreationTime(String passportCreationTime) {
         this.passportCreationTime = passportCreationTime;
     }
 
-    public Date getPassportExpirationTime() {
+    public String getPassportExpirationTime() {
         return passportExpirationTime;
     }
 
-    public void setPassportExpirationTime(Date passportExpirationTime) {
+    public void setPassportExpirationTime(String passportExpirationTime) {
         this.passportExpirationTime = passportExpirationTime;
     }
 
@@ -139,12 +141,12 @@ public class CreateApplicationDto {
         this.pesel = pesel;
     }
 
-    public String getPasportGenerator() {
-        return pasportGenerator;
+    public String getPassportGenerator() {
+        return passportGenerator;
     }
 
-    public void setPasportGenerator(String pasportGenerator) {
-        this.pasportGenerator = pasportGenerator;
+    public void setPassportGenerator(String passportGenerator) {
+        this.passportGenerator = passportGenerator;
     }
 
     public String getPurpose() {
@@ -155,19 +157,35 @@ public class CreateApplicationDto {
         this.purpose = purpose;
     }
 
-    public Date getArriveTime() {
+    public String getArriveTime() {
         return arriveTime;
     }
 
-    public void setArriveTime(Date arriveTime) {
+    public void setArriveTime(String arriveTime) {
         this.arriveTime = arriveTime;
     }
 
-    public int getVisitationLenght() {
-        return visitationLenght;
+    public int getVisitationLength() {
+        return visitationLength;
     }
 
-    public void setVisitationLenght(int visitationLenght) {
-        this.visitationLenght = visitationLenght;
+    public void setVisitationLength(int visitationLength) {
+        this.visitationLength = visitationLength;
+    }
+
+    public String getNationalities() {
+        return nationalities;
+    }
+
+    public void setNationalities(String nationalities) {
+        this.nationalities = nationalities;
+    }
+
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
     }
 }

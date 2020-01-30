@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Przeglądanie wniosku</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Muli|Open+Sans&display=swap">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</head>
+
+<body>
+<div class="container mt-3">
+    <div class="row row-bottom-margin">
+        <div class="col">
+            <h1>Przeglądanie wniosku</h1>
+        </div>
+    </div>
+    <div class="row row-bottom-margin">
+        <div class="col">
+            <h3>Dane wniosku</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>ID wniosku</b>
+                </div>
+                <div class="col">
+                    <span th:text="${app.localId}"></span>
+                </div>
+            </div>
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>ID Centralne sprawy</b>
+                </div>
+                <div class="col">
+                    <span th:text="${app.centralId}">-</span>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>Status wniosku</b>
+                </div>
+                <div class="col">
+                    <span th:text="${app.localId}">-</span>
+                </div>
+            </div>
+
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>Data złożenia</b>
+                </div>
+                <div class="col">
+                    21-09-2019
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="mt-5 mb-3">
+    <div class="row row-bottom-margin">
+        <div class="col">
+            <h3>Podstawowe informacje</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>Tytuł</b>
+                </div>
+                <div class="col">
+                    <span th:text="${app.title}">Wydanie wizy</span>
+                </div>
+            </div>
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>Treść</b>
+                </div>
+                <div class="col">
+                    <span th:text="${app.content}">-</span>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>Cel wizyty</b>
+                </div>
+                <div class="col">
+                    <span th:text="${app.purpose}">turystyczny</span>
+                </div>
+            </div>
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>Planowana data przyjazdu</b>
+                </div>
+                <div class="col">
+                    <span th:text="${app.arriveTime}">21-10-2019</span>
+                </div>
+            </div>
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>Planowany czas pobytu</b>
+                </div>
+                <div class="col">
+                    <span th:text="${app.visitationLength}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="mt-5 mb-3">
+    <div class="row row-bottom-margin">
+        <div class="col">
+            <h3>Dane osobowe wnioskodawcy</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>Imię</b>
+                </div>
+                <div class="col">
+                    <span th:text="${app.firstName}"></span>
+                </div>
+            </div>
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>Nazwisko</b>
+                </div>
+                <div class="col">
+                    <span th:text="${app.lastName}"></span>
+                </div>
+            </div>
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>Nazwisko rodowe</b>
+                </div>
+                <div class="col">
+                    <span th:text="${app.maidenName}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>Obywatelstwo</b>
+                </div>
+                <div class="col">
+                    <span th:text="${app.nationalities}"></span>
+                </div>
+            </div>
+
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>Płec</b>
+                </div>
+                <div class="col">
+                    <span th:text="${app.sex}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="mt-5 mb-3">
+    <div class="row row-bottom-margin">
+        <div class="col">
+            <h3>Paszport wnioskodawcy</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>Numer paszportu</b>
+                </div>
+                <div class="col">
+                    <span th:text="${app.passportNumber}"></span>
+                </div>
+            </div>
+
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>Organ wydający paszport</b>
+                </div>
+                <div class="col">
+                    <span th:text="${app.passportGenerator}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>Data wydania paszportu</b>
+                </div>
+                <div class="col">
+                    <span th:text="${app.passportCreationTime}"></span>
+                </div>
+            </div>
+
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-5">
+                    <b>Data wygaśnięcia paszportu</b>
+                </div>
+                <div class="col">
+                    <span th:text="${app.passportExpirationTime}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="mt-5 mb-3">
+    <div class="row row-bottom-margin" th:if="${!display}">
+        <div class="col">
+            <h3>Zmiana status wniosku</h3>
+            <p>Poprzez zmianę statusu wniosku na "przyjęty" tworzysz sprawę dotyczącą tego wniosku.</p>
+        </div>
+    </div>
+    <div class="row" th:if="${!display}" >
+        <div class="col">
+            <div class="row inner-row-margin">
+                <div class="col-6 col-sm-2">
+                    <b>Wybierz status</b>
+                </div>
+                <form th:action="@{'/application/apply/' + ${app.localId}}" action="#" method="post" th:object="${statusChange}">
+                    <div class="col-6 col-sm-2">
+                        <select th:field="*{manage}" id="status" >
+                            <div class="dropdown-menu dropdown-middle" aria-labelledby="dropdownMenu2">
+                                <option th:value="rejected">odrzucony</option>
+                                <option th:value="confirmed">przyjęty</option>
+                            </div>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <div class="row inner-row-margin">
+                            <button type="submit" class="btn btn-secondary">Zmień status</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <p>Created by <u>Anna Bodek i Łukasz Burdyna</u>
+        </div>
+        <div class="col-6"></div>
+    </div>
+</div>
+</body>
+
+</html>

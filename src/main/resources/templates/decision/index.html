@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Decyzje</title>
+    <title>Lista decyzji</title>
     <link rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/assets/fonts/font-awesome.min.css}">
     <link rel="stylesheet" th:href="@{/assets/fonts/material-icons.min.css}">
@@ -12,77 +12,84 @@
     <link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
     <link rel="stylesheet" th:href="@{/assets/css/Navigation-with-Search.css}">
     <link rel="stylesheet" th:href="@{/assets/css/styles.css}">
-    <link rel="stylesheet"
-          th:href="@{@{https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css}}">
 
 </head>
 
-<body style="background-color: #d7efef;">
-<div class="container" style="background-color: #ffffff;">
-    <main class="mt-5" style="background-color: #ffffff;">
-        <div class="row">
-            <div class="col">
-                <h1 style="width: 816px;">Decyzje</h1>
-            </div>
-            <div class="col text-center align-self-center"><a class="btn btn-primary float-right" role="button"
-                                                              data-bs-hover-animate="rubberBand"
-                                                              href="/decision/new_decision">Dodaj decyzję</a></div>
+<body>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col">
+            <h1>Lista decyzji</h1>
+            Lista wszystkich decyzji podjętych
         </div>
-        <div class="row">
-            <div class="col"><label>Wyszukaj decyzję:</label><input type="search" style="margin: 5px;width: 600px;"><i
-                    class="fa fa-search" style="margin: 5px;"></i></div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a href="/decision/new_decision">
+                <button type="button" role="button" class="btn btn-secondary btn-lg"
+                        style="margin: 1em 0em 0.5em 0em;">Dodaj decyzję
+                </button>
+            </a>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <thead>
-                        <tr>
-                            <th><strong>ID decyzji</strong></th>
-                            <th>ID sprawy</th>
-                            <th><strong>Rodzaj decyzji</strong></th>
-                            <th><strong>Data</strong></th>
-                            <th>Uzasadnienie</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="decision : ${decisions}">
-                            <td><span th:text="${decision.id}"></span></td>
-                            <td><span th:text="${decision.matter}"></span></td>
-                            <td><span th:text="${decision.decisionType}"></span></td>
-                            <td><span th:text="${decision.added}"></span></td>
-                            <td>
-                                <div>
-                                    <a class="btn" data-toggle="collapse" aria-expanded="false"
-                                       aria-controls="collapse-1" href="#collapse-1" role="button"
-                                       style="min-width: 200px;padding: 0;border: none;text-align: left">
-                                        <span th:text="${#strings.substring(decision.reason,0,10).concat('...')}">...</span>
-                                    </a>
-                                    <div
-                                            class="collapse" id="collapse-1">
-                                        <p th:text="${decision.reason}"></p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <a th:href="@{'/decision/' + ${decision.id}}">
-                                    <i class="material-icons" style="font-size: 30px;color: rgb(162,23,23);">delete_forever</i>
-                                </a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+    </div>
+
+
+    <div class="row mt-3">
+        <div class="col">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Rodzaj</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Uzasadnienie</th>
+                    <th scope="col">ID centralne sprawy</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="decision : ${decisions}">
+                    <td><span th:text="${decision.id}"></span></td>
+                    <td><span th:text="${decision.decisionType}"></span></td>
+                    <td><span th:text="${decision.added}"></span></td>
+                    <td>
+                        <div>
+                            <a class="btn" data-toggle="collapse" aria-expanded="false"
+                               aria-controls="collapse-1" href="#collapse-1" role="button"
+                               style="min-width: 200px;padding: 0;border: none;text-align: left">
+                                <span th:text="${#strings.substring(decision.reason,0,10).concat('...')}">...</span>
+                            </a>
+                            <div
+                                    class="collapse" id="collapse-1">
+                                <p th:text="${decision.reason}"></p>
+                            </div>
+                        </div>
+                    </td>
+                    <td><span th:text="${decision.centralId}"></span></td>
+                    <td>
+                        <a th:href="@{'/decision/' + ${decision.id}}" onclick="alert('Pomyślnie usunięto decyzję')" >
+                            <i class="material-icons"
+                               style="font-size: 30px;color: rgb(162,23,23);">delete_forever</i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-    </main>
+    </div>
+    <div class="row mt-5">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <p>Created by <u>Anna Bodek i Łukasz Burdyna</u>
+        </div>
+        <div class="col-6"></div>
+    </div>
 </div>
 <script th:src="@{/assets/js/jquery.min.js}"></script>
 <script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
 <script th:src="@{/assets/js/bs-init.js}"></script>
 <script th:src="@{/assets/js/expand.js}"></script>
-<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap-select.min.js}"></script>
 </body>
 
 </html>

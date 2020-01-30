@@ -1,8 +1,6 @@
 package software.design.consulate.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -19,27 +17,31 @@ public class Application {
     protected char sex;
     protected String martialState;
     protected Date birthday;
-    protected Date pasportCreationTime;
-    protected Date pasportExpirationTime;
+    protected String nationalities;
+    protected Date passportCreationTime;
+    protected Date passportExpirationTime;
     protected String pesel;
-    protected String pasportGenerator;
+    protected String passportGenerator;
     protected String purpose;
     protected Date arriveTime;
-    protected int visitationLenght;
+    protected int visitationLength;
+    protected String passportNumber;
+
+    private Long centralId;
+
     @Id
-    private UUID centralId;
-    private UUID localId;
+    @GeneratedValue
+    private Long localId;
 
     @OneToMany
     private List<Charge> charges;
 
     public Application() {
-        this.centralId = UUID.randomUUID();
+
     }
 
-    public Application(UUID localId, String title, String content, String firstName, String lastName, String maidenName, String email, char sex, String martialState, Date birthday, Date pasportCreationTime, Date pasportExpirationTime, String pesel, String pasportGenerator, String purpose, Date arriveTime, int visitationLenght, List<Charge> charges) {
-        this.centralId = UUID.randomUUID();
-        this.localId = localId;
+    public Application(Long centralId, String title, String content, String firstName, String lastName, String maidenName, String email, char sex, String martialState, Date birthday, String nationalities, Date passportCreationTime, Date passportExpirationTime, String pesel, String passportGenerator, String purpose, Date arriveTime, int visitationLength, String passportNumber,  List<Charge> charges) {
+        this.centralId = centralId;
         this.title = title;
         this.content = content;
         this.firstName = firstName;
@@ -49,29 +51,31 @@ public class Application {
         this.sex = sex;
         this.martialState = martialState;
         this.birthday = birthday;
-        this.pasportCreationTime = pasportCreationTime;
-        this.pasportExpirationTime = pasportExpirationTime;
+        this.nationalities = nationalities;
+        this.passportCreationTime = passportCreationTime;
+        this.passportExpirationTime = passportExpirationTime;
         this.pesel = pesel;
-        this.pasportGenerator = pasportGenerator;
+        this.passportGenerator = passportGenerator;
         this.purpose = purpose;
         this.arriveTime = arriveTime;
-        this.visitationLenght = visitationLenght;
+        this.visitationLength = visitationLength;
+        this.passportNumber = passportNumber;
         this.charges = charges;
     }
 
-    public UUID getCentralId() {
+    public Long getCentralId() {
         return centralId;
     }
 
-    public void setCentralId(UUID centralId) {
+    public void setCentralId(Long centralId) {
         this.centralId = centralId;
     }
 
-    public UUID getLocalId() {
+    public Long getLocalId() {
         return localId;
     }
 
-    public void setLocalId(UUID localId) {
+    public void setLocalId(Long localId) {
         this.localId = localId;
     }
 
@@ -147,20 +151,20 @@ public class Application {
         this.birthday = birthday;
     }
 
-    public Date getPasportCreationTime() {
-        return pasportCreationTime;
+    public Date getPassportCreationTime() {
+        return passportCreationTime;
     }
 
-    public void setPasportCreationTime(Date pasportCreationTime) {
-        this.pasportCreationTime = pasportCreationTime;
+    public void setPassportCreationTime(Date passportCreationTime) {
+        this.passportCreationTime = passportCreationTime;
     }
 
-    public Date getPasportExpirationTime() {
-        return pasportExpirationTime;
+    public Date getPassportExpirationTime() {
+        return passportExpirationTime;
     }
 
-    public void setPasportExpirationTime(Date pasportExpirationTime) {
-        this.pasportExpirationTime = pasportExpirationTime;
+    public void setPassportExpirationTime(Date passportExpirationTime) {
+        this.passportExpirationTime = passportExpirationTime;
     }
 
     public String getPesel() {
@@ -171,12 +175,12 @@ public class Application {
         this.pesel = pesel;
     }
 
-    public String getPasportGenerator() {
-        return pasportGenerator;
+    public String getPassportGenerator() {
+        return passportGenerator;
     }
 
-    public void setPasportGenerator(String pasportGenerator) {
-        this.pasportGenerator = pasportGenerator;
+    public void setPassportGenerator(String passportGenerator) {
+        this.passportGenerator = passportGenerator;
     }
 
     public String getPurpose() {
@@ -195,12 +199,12 @@ public class Application {
         this.arriveTime = arriveTime;
     }
 
-    public int getVisitationLenght() {
-        return visitationLenght;
+    public int getVisitationLength() {
+        return visitationLength;
     }
 
-    public void setVisitationLenght(int visitationLenght) {
-        this.visitationLenght = visitationLenght;
+    public void setVisitationLength(int visitationLength) {
+        this.visitationLength = visitationLength;
     }
 
     public List<Charge> getCharges() {
@@ -209,5 +213,21 @@ public class Application {
 
     public void setCharges(List<Charge> charges) {
         this.charges = charges;
+    }
+
+    public String getNationalities() {
+        return nationalities;
+    }
+
+    public void setNationalities(String nationalities) {
+        this.nationalities = nationalities;
+    }
+
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
     }
 }

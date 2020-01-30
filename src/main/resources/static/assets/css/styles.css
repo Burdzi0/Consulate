@@ -1,6 +1,3 @@
-tr {
-}
-
 .alert {
   display: none;
 }
@@ -9,3 +6,64 @@ tr {
   font-size: 20px;
 }
 
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.btn.btn-outline-secondary{
+  color: white;
+  background-color: #6c757d;
+}
+
+.input-group.mb-3{
+  margin-top: 1em;
+}
+
+.inner-row-margin{
+  margin-bottom: 0.5em;
+}
+
+.row-bottom-margin{
+  margin-bottom: 0.6em;
+}
+
+.tab-content {
+  border-left: 1px solid #dee2e6;
+  padding: 15px;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link{
+  background-color: #6c757d !important;
+}
+
+.nav-pills .nav-link{
+  color: #6c757d;
+  border-radius: 0rem !important;
+}
+
+.nav-pills{
+  border-style: solid !important;
+  border-radius: 0.25rem;
+  border-width: thin;
+  border-color: #6c757d;
+}
+
+.tab-content{
+  padding: 0em 2em 1em 2em;
+}
+
+.btn.btn-secondary.btn-form-width{
+  width: 50%;
+}
+
+.btn.btn-block.btn-success.btn-form-success-width{
+  width: 50%;
+}
+
+.dropdown-menu.dropdown-middle{
+  vertical-align: middle;
+}
+
+.table.table-striped.table-striped-margin{
+  margin: 0em 1em 0em 1em;
+}

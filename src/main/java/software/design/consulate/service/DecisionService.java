@@ -3,14 +3,14 @@ package software.design.consulate.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import software.design.consulate.model.Decision;
-import software.design.consulate.model.dto.CreateDecisionDto;
-import software.design.consulate.model.dto.DecisionDto;
+import software.design.consulate.model.dto.decision.CreateDecisionDto;
+import software.design.consulate.model.dto.decision.DecisionDto;
 import software.design.consulate.repository.DecisionRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static software.design.consulate.model.dto.DecisionDto.from;
+import static software.design.consulate.model.dto.decision.DecisionDto.from;
 
 
 @Service
@@ -41,7 +41,7 @@ public class DecisionService {
     }
 
     private Decision newDecision(CreateDecisionDto applicationDto) {
-        return new Decision(applicationDto.getMatter(), applicationDto.getDecisionType().toString(), applicationDto.getReason());
+        return new Decision("", applicationDto.getMatter(), applicationDto.getDecisionType().toString(), applicationDto.getReason());
     }
 
 }

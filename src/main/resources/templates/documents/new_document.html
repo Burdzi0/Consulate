@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Dodanie dokumentu identyfikacyjnego</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" th:href="@{/assets/css/styles.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Muli|Open+Sans&display=swap">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</head>
+
+<body>
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-8">
+            <h1>Dodaj dokument identyfikacyjny</h1>
+        </div>
+        <div class="col-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-personal-data-tab" data-toggle="pill"
+                   href="#v-pills-personal-data" role="tab" aria-controls="v-pills-personal-data" aria-selected="false">Dane
+                    osobowe</a>
+                <a class="nav-link" id="v-pills-passport-tab" data-toggle="pill" href="#v-pills-passport" role="tab"
+                   aria-controls="v-pills-passport" aria-selected="false">Dane dokumentu</a>
+            </div>
+        </div>
+        <form th:action="@{/document/save}" action="#" method="post" th:object="${createDocumentDto}">
+            <div class="col-9">
+                <div class="tab-content tab-left-border" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active " id="v-pills-personal-data" role="tabpanel"
+                         aria-labelledby="v-pills-personal-data-tab">
+                        <form>
+                            <div class="form row">
+                                <div class="form-group col-md-6">
+                                    <label for="name">Imię</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Imię"
+                                           th:field="*{firstName}" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="orgsurname">Nazwisko rodowe</label>
+                                    <input type="text" class="form-control" id="orgsurname" placeholder="Nazwisko"
+                                           th:field="*{maidenName}"
+                                           required>
+                                </div>
+                            </div>
+
+                            <div class="form row">
+                                <div class="form-group col-md-6">
+                                    <label for="surname">Nazwisko</label>
+                                    <input type="text" class="form-control" id="surname" placeholder="Nazwisko"
+                                           th:field="*{lastName}"
+                                           required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="plec">Płeć</label>
+                                <select id="plec" th:field="*{sex}">
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <option th:value="M">M</option>
+                                        <option th:value="K">K</option>
+                                        <div class="dropdown-divider"></div>
+                                        <option th:value="O">Inna</option>
+                                    </div>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="stan">Stan cywilny</label>
+                                <select id="stan" th:field="*{martialState}">
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <option th:value="wolna">wolny/a</option>
+                                        <option th:value="zamezna">żonaty/zamężna</option>
+                                        <option th:value="wdowa">wdowiec/wdowa</option>
+                                        <option th:value="rozwiedziona">rozwiedziony/a</option>
+                                    </div>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bday">Data urodzenia</label>
+                                <input type="date" class="form-control" th:field="*{birthday}" id="bday" required>
+                            </div>
+
+                            <div class="form row">
+                                <div class="form-group col-md-6"></div>
+                                <div class="form-group col-md-6">
+                                    <button type="button" class="btn btn-secondary btn-form-width float-right">Dalej
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-passport" role="tabpanel"
+                         aria-labelledby="v-pills-passport-tab">
+                        <div class="form-group">
+                            <label for="typ">Rodzaj dokumentu identyfikacyjnego</label>
+                            <select id="typ" th:field="*{documentType}">
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <option th:value="PASSPORT">paszport</option>
+                                    <option th:value="ID">dowód osobisty</option>
+                                    <option th:value="DRIVING_LICENSE">prawo jazdy</option>
+                                </div>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pnr">Numer dokumentu identyfikacyjnego</label>
+                            <input type="text" class="form-control" id="pnr"  th:field="*{number}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sday">Data wydania dokumentu identyfikacyjnego</label>
+                            <input type="date" class="form-control" id="sday" th:field="*{creationTime}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="eday">Data wygaśnięcia dokumentu identyfikacyjnego</label>
+                            <input type="date" class="form-control" id="eday" th:field="*{expireTime}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="po">Organ wydający dokument identyfikacyjny</label>
+                            <input type="text" class="form-control" id="po" th:field="*{generator}" required>
+                        </div>
+
+                        <div class="form row">
+                            <div class="form-group col-md-6">
+                                <button type="button" class="btn btn-secondary btn-form-width float-left">Wstecz
+                                </button>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <button type="submit" onclick="alert('Pomyślnie dodano dokument')"
+                                        class="btn btn-block btn-success btn-form-success-width float-right">Wyślij
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-3"></div>
+    <div class="row mt-5">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <p>Created by <u>Anna Bodek i Łukasz Burdyna</u>
+        </div>
+        <div class="col-6"></div>
+    </div>
+</div>
+
+</body>
+
+</html>

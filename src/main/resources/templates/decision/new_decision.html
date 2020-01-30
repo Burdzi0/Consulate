@@ -25,12 +25,14 @@
             <div class="col-xl-3"></div>
             <div class="col-xl-6">
                 <h1 style="padding: 10px;">Dodawanie decyzji</h1>
+                <!--/*@thymesVar id="decisionDto" type="software.design.consulate.model.dto.decision.CreateDecisionDto"*/-->
                 <form th:action="@{/decision/save}" action="#" method="post" th:object="${decisionDto}">
                     <div class="form-group"><label>Sprawa</label>
                         <select class="form-control" th:field="*{matter}">
-                            <option value="12" selected="" th:value="1">Sprawa 1</option>
-                            <option value="13" th:value="2">Sprawa 2</option>
-                            <option value="14" th:value="3">Sprawa 3</option>
+                            <option th:each="mat : ${matters}" th:value="${mat.localId}">
+                                <span th:text="${mat.application.title}"></span>
+                            </option>
+
                         </select>
                     </div>
                     <div class="form-group"><label>Rodzaj decyzji</label>
@@ -47,7 +49,7 @@
                         <textarea class="form-control form-control-lg" id="contenttext" required="" minlength="15"
                                   title="Wymagane pole!" th:field="*{reason}"></textarea></div>
                     <div class="form-group text-success">
-                        <button class="btn btn-success btn-block" id="button" th:type="submit">Dodaj decyzję
+                        <button class="btn btn-success btn-block" id="button" onclick="alert('Pomyślnie dodano decyzję')"  th:type="submit">Dodaj decyzję
                         </button>
                     </div>
                 </form>

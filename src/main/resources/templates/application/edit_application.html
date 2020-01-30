@@ -2,29 +2,44 @@
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Dodanie wniosku</title>
+    <title>Edycja wniosku</title>
     <meta charset="utf-8">
     <link rel="stylesheet" th:href="@{/assets/css/styles.css}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Muli|Open+Sans&display=swap">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
             crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+    <script>
+       console.log('me');
+        $(document).ready(function () {
+                $.ajax({
+                    dataType: 'json',
+                    url: 'http://localhost:8080/application/infojs/' + window.location.href.substr(window.location.href - 1),
+                    success: function(data) {
+                        console.log(data);
+                        document.getElementById("title").setAttribute('value', data.title);
+                        document.getElementById("cont").setAttribute('value', data.title);
+                        document.getElementById("dday").setAttribute('value', data.title);
+                        document.getElementById("days").setAttribute('value', data.title)
+                    }
+                })
+            }
+        )
+    </script>
 </head>
 
 <body>
 <div class="container">
     <div class="row mt-3">
         <div class="col-8">
-            <h1>Złóż nowy wniosek</h1>
-            <p>W celu założenia sprawy należy najpierw wypełnić i wysłać wniosek.</p>
+            <h1>Edytuj dodany wniosek</h1>
+            <p>Wniosek jest wciąż nierozpatrzony, więc możesz zmienić podane informacje.</p>
         </div>
         <div class="col-2"></div>
     </div>
@@ -40,15 +55,19 @@
             </div>
         </div>
         <div class="col-9">
-            <form th:action="@{/application/save}" action="#" method="post" th:object="${createApplicationDto}">
+            <!--/*@thymesVar id="editApplicationDto" type="software.design.consulate.model.dto.application.EditApplicationDto"*/-->
+            <form th:action="@{/application/edit/}" action="#" method="post" th:object="${editApplicationDto}">
+                <input type="hidden" th:value="${setId}" th:field="*{id}">
                 <div class="tab-content tab-left-border" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="info" role="tabpanel"
                          aria-labelledby="v-pills-info-tab">
-                        <!--/*@thymesVar id="createApplicationDto" type="software.design.consulate.model.dto.application.CreateApplicationDto"*/-->
                         <div class="form-group">
                             <label for="title">Tytuł</label>
-                            <input type="text" th:field="*{title}" class="form-control" id="title"
+                            <input type="text" th:field="*{title}" th:value="${toBeUpdated.title}"
+                                   th:attr="value=#{toBeUpdated.title}" value="Title" class="form-control" id="title"
+                                   name="title"
                                    placeholder="Tytuł wniosku" required>
+                            <span th:text="${toBeUpdated.title}"></span>
                         </div>
 
                         <div class="form-group">
@@ -87,7 +106,8 @@
                             <div class="form-group col-md-6"></div>
                             <div class="form-group col-md-6">
                                 <div class="form-group col-md-6">
-                                    <a class="btn btn-secondary btn-form-width float-right" onclick="$('#v-pills-personal-data-tab').trigger('click')">Dalej
+                                    <a class="btn btn-secondary btn-form-width float-right"
+                                       onclick="$('#v-pills-personal-data-tab').trigger('click')">Dalej
                                     </a>
                                 </div>
                             </div>
@@ -156,11 +176,13 @@
 
                         <div class="form row">
                             <div class="form-group col-md-6">
-                                <a class="btn btn-secondary btn-form-width float-left" onclick="$('#v-pills-info-tab').trigger('click')">Wstecz
+                                <a class="btn btn-secondary btn-form-width float-left"
+                                   onclick="$('#v-pills-info-tab').trigger('click')">Wstecz
                                 </a>
                             </div>
                             <div class="form-group col-md-6">
-                                <a class="btn btn-secondary btn-form-width float-right" onclick="$('#v-pills-passport-tab').trigger('click')">Dalej
+                                <a class="btn btn-secondary btn-form-width float-right"
+                                   onclick="$('#v-pills-passport-tab').trigger('click')">Dalej
                                 </a>
                             </div>
                         </div>
@@ -192,11 +214,12 @@
 
                         <div class="form row">
                             <div class="form-group col-md-6">
-                                <a class="btn btn-secondary btn-form-width float-left" onclick="$('#v-pills-personal-data-tab').trigger('click')">Wstecz
+                                <a class="btn btn-secondary btn-form-width float-left"
+                                   onclick="$('#v-pills-personal-data-tab').trigger('click')">Wstecz
                                 </a>
                             </div>
                             <div class="form-group col-md-6">
-                                <button type="submit" onclick="alert('Pomyślnie dodano wniosek')"
+                                <button type="submit"
                                         class="btn btn-block btn-success btn-form-success-width float-right">
                                     Wyślij
                                 </button>

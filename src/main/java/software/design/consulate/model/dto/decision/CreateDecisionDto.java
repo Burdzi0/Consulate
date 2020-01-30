@@ -1,4 +1,4 @@
-package software.design.consulate.model.dto;
+package software.design.consulate.model.dto.decision;
 
 import software.design.consulate.model.DecisionType;
 
